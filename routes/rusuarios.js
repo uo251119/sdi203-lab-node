@@ -1,4 +1,4 @@
-module.exports= function(app) {
+module.exports = function (app) {
 
     app.get('/usuarios', function (req, res) {
         console.log("Depurar aquó");
