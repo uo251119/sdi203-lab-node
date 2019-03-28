@@ -148,6 +148,16 @@ module.exports = function (app, swig, gestorBD) {
         });
     });
 
+    app.get('/cancion/eliminar/:id', function (req, res) {
+        var criterio = {"_id" : gestorBD.mongo.ObjectID(req.params.id) };
+        gestorBD.eliminarCancion(criterio,function(canciones){
+            if ( canciones == null ){
+                res.send(respuesta);
+            } else {
+                res.redirect("/publicaciones");
+            }
+        });
+    })
 
 
     function paso1ModificarPortada(files, id, callback){
@@ -164,6 +174,7 @@ module.exports = function (app, swig, gestorBD) {
             paso2ModificarAudio(files, id, callback); // SIGUIENTE
         }
     };
+
     function paso2ModificarAudio(files, id, callback){
         if (files.audio != null) {
             var audio = files.audio;
@@ -178,6 +189,4 @@ module.exports = function (app, swig, gestorBD) {
             callback(true); // FIN
         }
     };
-
-
 };
