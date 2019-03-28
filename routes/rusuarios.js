@@ -49,6 +49,19 @@ module.exports = function (app, swig, gestorBD) {
         });
     });
 
-
+    app.get("/publicaciones", function(req, res) {
+        var criterio = { autor : req.session.usuario };
+        gestorBD.obtenerCanciones(criterio, function(canciones) {
+            if (canciones == null) {
+                res.send("Error al listar ");
+            } else {
+                var respuesta = swig.renderFile('views/bpublicaciones.html',
+                    {
+                        canciones : canciones
+                    });
+                res.send(respuesta);
+            }
+        });
+    });
 
 };
