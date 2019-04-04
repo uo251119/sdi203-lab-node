@@ -40,7 +40,7 @@ routerAudios.use(function (req, res, next) {
     var path = require('path');
     var idCancion = path.basename(req.originalUrl, '.mp3');
     gestorBD.obtenerCanciones(
-        {id: mongo.ObjectID(idCancion)}, function (canciones) {
+        {"_id": mongo.ObjectID(idCancion)}, function (canciones) {
             if (req.session.usuario && canciones[0].autor == req.session.usuario) {
                 next();
             } else {
